@@ -1,5 +1,6 @@
 package io.github.iromul.media
 
+import java.io.File
 import java.nio.file.Path
 
 fun Path.excludeRoot(exclusion: Path): Path {
@@ -17,3 +18,5 @@ fun String.sanitizeWindowsFileName() = replace("[<>:\"/\\\\|?*]".toRegex(), "_")
 }
 
 val Path.extension: String get() = fileName.toString().substringAfterLast(".")
+
+fun File.listFilesSafely(): List<File> = listFiles()?.toList() ?: emptyList()
