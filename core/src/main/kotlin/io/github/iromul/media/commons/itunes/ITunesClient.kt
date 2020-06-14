@@ -1,7 +1,8 @@
-package io.github.iromul.media.scripts
+package io.github.iromul.media.commons.itunes
 
 import com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import io.github.iromul.media.commons.itunes.model.Entries
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.request.get
@@ -21,8 +22,8 @@ class ITunesClient {
     }
 
     fun findAlbumsByTerm(term: String, country: String = "ru"): Entries {
-        return runBlocking {
-            val json = client.get<ByteArray>(url) {
+        val json = runBlocking {
+            client.get<ByteArray>(url) {
                 url {
                     parameters.run {
                         append("term", term)
@@ -32,9 +33,9 @@ class ITunesClient {
                     }
                 }
             }
-
-            objectMapper.readValue(json, Entries::class.java)
         }
+
+        return objectMapper.readValue(json, Entries::class.java)
     }
 
     fun getArtworkSpecificSize(originUrl: String, size: Int): ByteArray {
@@ -42,18 +43,4 @@ class ITunesClient {
             client.get<ByteArray>(originUrl.replace("100x100", "${size}x${size}"))
         }
     }
-
-    data class Entries(
-        var resultCount: Int? = null,
-        var results: List<Entry> = emptyList()
-    ) : Iterable<Entry> {
-        override fun iterator() = results.iterator()
-    }
-
-    class Entry(
-        var artistName: String? = null,
-        var collectionName: String? = null,
-        var artworkUrl60: String? = null,
-        var artworkUrl100: String? = null
-    )
 }
