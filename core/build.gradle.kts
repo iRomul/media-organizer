@@ -28,4 +28,7 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.10.2")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.+")
     implementation("net.coobird:thumbnailator:[0.4, 0.5)")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
+    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.22")
+    testImplementation("io.mockk:mockk:1.10.0")
 }
