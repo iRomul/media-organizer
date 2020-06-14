@@ -13,7 +13,7 @@ fun Path.excludeRoot(exclusion: Path): Path {
 }
 
 fun String.sanitizeWindowsFileName() = replace("[<>:\"/\\\\|?*]".toRegex(), "_").run {
-    if (endsWith(".")) this + "_" else this
+    (if (endsWith(".")) this + "_" else this).trimEnd()
 }
 
 val Path.extension: String get() = fileName.toString().substringAfterLast(".")
