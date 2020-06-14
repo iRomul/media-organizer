@@ -1,6 +1,7 @@
 package io.github.iromul.media.scripts
 
 import io.github.iromul.media.excludeRoot
+import io.github.iromul.media.extension
 import io.github.iromul.media.library.MediaLibrary
 import io.github.iromul.media.library.collection.MediaCollection
 import io.github.iromul.media.library.collection.MediaCollectionType.*
@@ -9,7 +10,6 @@ import io.github.iromul.media.library.layout.DefaultMediaCollectionLayout
 import io.github.iromul.media.sanitizeWindowsFileName
 import io.github.iromul.media.scripts.order.AlbumCollectionOrder
 import io.github.iromul.media.scripts.order.PlaylistCollectionOrder
-import io.ktor.util.extension
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
