@@ -23,6 +23,8 @@ class ImageFilesCollection : Collection<ImageFile> {
         images.add(imageFile)
     }
 
+    fun findImageFileByMimeAndSize(mime: String, size: Int) = images.find { it.mime == mime && it.size == size }
+
     override val size: Int
         get() = images.size
 

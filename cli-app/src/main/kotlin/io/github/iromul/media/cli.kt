@@ -34,6 +34,8 @@ class CopyMediaCommand : CliktCommand(
         .file(exists = true, folderOkay = true, writable = true)
 
     override fun run() {
+        Config.mediaRoot = mediaRoot
+
         val organizer = OrganizeAndCopyFilesScript(mediaRoot, output, dryRun)
 
         organizer.perform()
@@ -51,6 +53,8 @@ class BuildArtworkCacheCommand : CliktCommand(
         .required()
 
     override fun run() {
+        Config.mediaRoot = mediaRoot
+
         BuildArtworkCacheScript(mediaRoot).perform()
     }
 }
@@ -65,8 +69,13 @@ class AssignCoversToMediaFilesCommand : CliktCommand(
         .file(exists = true, folderOkay = true, readable = true)
         .required()
 
+    private val dryRun by option("--dry-run", "-D", help = "Do not perform any file operations")
+        .flag()
+
     override fun run() {
-        AssignArtworkToMediaFilesScript(mediaRoot).perform()
+        Config.mediaRoot = mediaRoot
+
+        AssignArtworkToMediaFilesScript(mediaRoot, dryRun).perform()
     }
 }
 

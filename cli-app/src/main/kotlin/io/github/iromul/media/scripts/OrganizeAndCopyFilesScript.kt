@@ -38,7 +38,7 @@ class OrganizeAndCopyFilesScript(
             .toFile()
 
         if (targetOutput.exists()) {
-            println("Skipping ${collection.stringify()} because it already exists")
+            println("${collection.stringify()}: Skipping because it already exists")
 
             return
         } else {
@@ -47,7 +47,7 @@ class OrganizeAndCopyFilesScript(
             }
         }
 
-        println("Copying ${collection.stringify()} to '${targetOutput.path}'...")
+        println("${collection.stringify()}: Copying to ${targetOutput.path}")
 
         val orderedMediaFiles = when (collection.type) {
             ALBUM -> AlbumCollectionOrder(collection)

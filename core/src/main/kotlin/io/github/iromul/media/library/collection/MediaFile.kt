@@ -1,8 +1,10 @@
 package io.github.iromul.media.library.collection
 
+import io.github.iromul.media.artwork.file.ImageFile
 import org.jaudiotagger.audio.AudioFile
 import org.jaudiotagger.tag.Tag
 import org.jaudiotagger.tag.datatype.Artwork
+import org.jaudiotagger.tag.reference.PictureTypes
 import java.io.File
 
 data class MediaFile(
@@ -18,8 +20,16 @@ data class MediaFile(
 
     var shouldBeCommitted = false
 
-    fun hasArtworks(): Boolean {
-        return tag.artworkList.isNotEmpty()
+    fun hasFrontCoverOfSize(size: Int) = tag.artworkList.any { it.isFrontCover() && it.hasSize(size) }
+
+    fun addArtwork(imageFile: ImageFile) {
+        val artwork = Artwork().apply {
+            mimeType = imageFile.mime
+            binaryData = imageFile.bytes()
+            pictureType = PictureTypes.DEFAULT_ID
+        }
+
+        addArtwork(artwork)
     }
 
     fun addArtwork(artwork: Artwork) {
@@ -29,4 +39,7 @@ data class MediaFile(
     fun save() {
         shouldBeCommitted = true
     }
+
+    private fun Artwork.isFrontCover() = pictureType == PictureTypes.DEFAULT_ID
+    private fun Artwork.hasSize(size: Int) = image.raster.run { width.coerceAtLeast(height) } == size
 }
