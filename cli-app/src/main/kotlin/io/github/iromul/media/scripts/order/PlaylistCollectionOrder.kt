@@ -19,9 +19,9 @@ class PlaylistCollectionOrder(
         val orderedMediaFiles = if (playlistFile.exists() && playlistFile.isFile) {
             val playlist = loadPlaylistData(playlistFile)
 
-            mediaCollection.reorderByPlaylist(playlist)
+            this.mediaCollection.mediaFiles.reorderByPlaylist(playlist)
         } else {
-            mediaCollection.shuffled()
+            mediaCollection.mediaFiles.shuffled()
         }
 
         return orderedMediaFiles.mapIndexed { index, mediaFile ->

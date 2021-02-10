@@ -18,7 +18,7 @@ class BuildArtworkCacheScript(
             val library = MediaLibrary(mediaRoot, DefaultMediaCollectionLayout(mediaRoot))
 
             library.forEachCollection {
-                it.forEachMediaFile { mediaFile ->
+                it.mediaFiles.forEach { mediaFile ->
                     try {
                         val cacheEntry = provider.find(mediaFile)
 

@@ -18,8 +18,6 @@ data class MediaFile(
     val title: String
 ) {
 
-    var shouldBeCommitted = false
-
     fun hasFrontCoverOfSize(size: Int) = tag.artworkList.any { it.isFrontCover() && it.hasSize(size) }
 
     fun addArtwork(imageFile: ImageFile) {
@@ -37,7 +35,7 @@ data class MediaFile(
     }
 
     fun save() {
-        shouldBeCommitted = true
+        audioFile.commit()
     }
 
     private fun Artwork.isFrontCover() = pictureType == PictureTypes.DEFAULT_ID

@@ -11,7 +11,7 @@ class AlbumCollectionOrder(
         val totalTracks = mediaCollection.size
         val totalTracksDigits = totalTracks.toString().length
 
-        return mediaCollection
+        return mediaCollection.mediaFiles
             .sortedBy(MediaFile::track)
             .map {
                 val trackNumberFormatted = it.track.toString().padStart(totalTracksDigits, '0')

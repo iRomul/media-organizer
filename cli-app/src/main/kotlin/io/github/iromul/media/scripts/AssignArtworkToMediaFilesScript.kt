@@ -18,7 +18,7 @@ class AssignArtworkToMediaFilesScript(
         val provider = Config.AssignArtworkToMediaFilesScript.artworkProvider
 
         library.forEachCollection {
-            it.forEachMediaFile { mediaFile ->
+            it.mediaFiles.forEach { mediaFile ->
                 val targetSize = Config.AssignArtworkToMediaFilesScript.targetSize
 
                 val imageFilesCollection = provider.find(mediaFile)

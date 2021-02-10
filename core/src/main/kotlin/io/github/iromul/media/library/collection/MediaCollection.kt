@@ -9,9 +9,9 @@ class MediaCollection(
     val directory: File,
     val type: MediaCollectionType,
     files: List<File>
-) : Collection<MediaFile> {
+) {
 
-    private val mediaFiles = files.map {
+    val mediaFiles = files.map {
         val audioFile = AudioFileIO.read(it)
 
         val tag = audioFile.tag
@@ -24,21 +24,5 @@ class MediaCollection(
         MediaFile(it, audioFile, tag, track, artist, album, title)
     }
 
-    fun forEachMediaFile(action: (MediaFile) -> Unit) = forEach {
-        action(it)
-
-        if (it.shouldBeCommitted) {
-            it.audioFile.commit()
-        }
-    }
-
-    override val size = mediaFiles.size
-
-    override fun contains(element: MediaFile) = mediaFiles.contains(element)
-
-    override fun containsAll(elements: Collection<MediaFile>) = mediaFiles.containsAll(elements)
-
-    override fun isEmpty() = mediaFiles.isEmpty()
-
-    override fun iterator() = mediaFiles.iterator()
+    val size = mediaFiles.size
 }
