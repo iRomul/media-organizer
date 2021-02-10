@@ -14,14 +14,16 @@ java {
     sourceCompatibility = JavaVersion.VERSION_11
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
+subprojects {
+    tasks.test {
+        useJUnitPlatform()
+    }
 
-tasks.compileKotlin {
-    kotlinOptions.jvmTarget = "11"
-}
+    tasks.compileKotlin {
+        kotlinOptions.jvmTarget = "11"
+    }
 
-tasks.compileTestKotlin {
-    kotlinOptions.jvmTarget = "11"
+    tasks.compileTestKotlin {
+        kotlinOptions.jvmTarget = "11"
+    }
 }
