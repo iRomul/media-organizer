@@ -11,6 +11,7 @@ import com.github.ajalt.clikt.parameters.types.file
 import io.github.iromul.media.scripts.AssignArtworkToMediaFilesScript
 import io.github.iromul.media.scripts.BuildArtworkCacheScript
 import io.github.iromul.media.scripts.OrganizeAndCopyFilesScript
+import io.github.iromul.media.scripts.config.Config
 
 class MediaOrganizerCommand : NoRunCliktCommand(
     name = "media-organizer",

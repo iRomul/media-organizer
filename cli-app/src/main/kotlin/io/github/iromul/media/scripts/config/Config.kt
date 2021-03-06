@@ -1,4 +1,4 @@
-package io.github.iromul.media
+package io.github.iromul.media.scripts.config
 
 import io.github.iromul.media.artwork.provider.impls.AutoCacheableArtworkStore
 import io.github.iromul.media.artwork.provider.impls.AutoResizerArtworkStoreProxy

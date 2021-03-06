@@ -4,7 +4,8 @@ package io.github.iromul.media.scripts
 import io.github.iromul.media.Config
 import io.github.iromul.media.library.MediaLibrary
 import io.github.iromul.media.library.collection.stringify
-import io.github.iromul.media.library.layout.DefaultMediaCollectionLayout
+import io.github.iromul.media.scripts.config.Config
+import io.github.iromul.media.scripts.config.MediaLibraryLayoutConfig
 import java.io.File
 
 class AssignArtworkToMediaFilesScript(

@@ -1,6 +1,6 @@
 package io.github.iromul.media.scripts
 
-import io.github.iromul.media.Config
+import io.github.iromul.media.scripts.config.Config
 import java.io.File
 
 abstract class Script(
