@@ -22,7 +22,7 @@ class AutoResizerArtworkStoreProxy(
         val storedSizes = jpegs.map { it.size }
 
         val remainsTargets = targetSizes.filter { it !in storedSizes }
-        val largestImage = collection.maxBy { it.size }!!
+        val largestImage = collection.maxByOrNull { it.size }!!
 
         val bais = ByteArrayInputStream(largestImage.bytes())
 

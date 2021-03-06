@@ -1,5 +1,4 @@
 plugins {
-    java
     kotlin("jvm")
     application
 }
@@ -8,7 +7,7 @@ group = "io.github.iromul.media"
 version = "1.0.0-SNAPSHOT"
 
 application {
-    mainClassName = "io.github.iromul.media.CliKt"
+    mainClass.set("io.github.iromul.media.CliKt")
 }
 
 repositories {
