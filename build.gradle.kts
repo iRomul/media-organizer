@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    kotlin("jvm") version "1.4.31" apply false
+    kotlin("jvm") version "1.4.32" apply false
 }
 
 group = "io.github.iromul.media"
