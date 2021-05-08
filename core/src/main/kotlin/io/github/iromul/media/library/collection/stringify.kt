@@ -1,16 +1,8 @@
 package io.github.iromul.media.library.collection
 
-import io.github.iromul.media.library.collection.MediaCollectionType.*
+fun MediaCollectionType.stringify() = name
 
-fun MediaCollection.stringify(): String {
-    val typeString = when (type) {
-        ALBUM -> "album"
-        PLAYLIST -> "playlist"
-        ARTIST_ESSENTIAL_PLAYLIST -> "playlist (artist essential)"
-    }
-
-    return "$typeString $name"
-}
+fun MediaCollection.stringify() = "${type.stringify()} \"$name\""
 
 fun MediaFile.stringify(includeTrack: Boolean = false, includeFile: Boolean = false): String {
     val minimal = listOf(artist, album, title).joinToString(separator = " - ") { it.notNullOrBlankOrElse("<N/A>") }
@@ -28,4 +20,4 @@ fun MediaFile.stringify(includeTrack: Boolean = false, includeFile: Boolean = fa
     return result
 }
 
-private fun String?.notNullOrBlankOrElse(default: String) = if (isNullOrBlank()) default else this!!
+private fun String?.notNullOrBlankOrElse(default: String) = if (isNullOrBlank()) default else this

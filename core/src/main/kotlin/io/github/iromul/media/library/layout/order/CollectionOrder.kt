@@ -1,4 +1,4 @@
-package io.github.iromul.media.scripts.order
+package io.github.iromul.media.library.layout.order
 
 import io.github.iromul.media.library.collection.MediaCollection
 import io.github.iromul.media.library.collection.MediaFile

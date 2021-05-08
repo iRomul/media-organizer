@@ -2,6 +2,7 @@ package io.github.iromul.media.library.collection
 
 import io.github.iromul.media.artwork.file.ImageFile
 import org.jaudiotagger.audio.AudioFile
+import org.jaudiotagger.tag.FieldKey
 import org.jaudiotagger.tag.Tag
 import org.jaudiotagger.tag.datatype.Artwork
 import org.jaudiotagger.tag.reference.PictureTypes
@@ -10,13 +11,19 @@ import java.io.File
 data class MediaFile(
     val file: File,
     val audioFile: AudioFile,
-    val tag: Tag,
-
-    val track: Int,
-    val artist: String,
-    val album: String,
-    val title: String
 ) {
+
+    val tag: Tag
+        get() = audioFile.tag
+
+    val track: Int
+        get() = tag.getFirst(FieldKey.TRACK).toIntOrNull() ?: 1
+    val artist: String
+        get() = tag.getFirst(FieldKey.ARTIST)
+    val album: String
+        get() = tag.getFirst(FieldKey.ALBUM)
+    val title: String
+        get() = tag.getFirst(FieldKey.TITLE)
 
     fun hasFrontCoverOfSize(size: Int) = tag.artworkList.any { it.isFrontCover() && it.hasSize(size) }
 
