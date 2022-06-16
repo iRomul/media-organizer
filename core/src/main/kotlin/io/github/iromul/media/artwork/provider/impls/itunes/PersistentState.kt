@@ -7,7 +7,7 @@ class PersistentState(
     private val stateDirectory: File
 ) {
 
-    fun found(terms: Terms) {
+    fun found() {
         // no-op
     }
 

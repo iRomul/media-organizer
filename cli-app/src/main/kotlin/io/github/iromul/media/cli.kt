@@ -1,7 +1,7 @@
 package io.github.iromul.media
 
 import com.github.ajalt.clikt.core.CliktCommand
-import com.github.ajalt.clikt.core.NoRunCliktCommand
+import com.github.ajalt.clikt.core.NoOpCliktCommand
 import com.github.ajalt.clikt.core.subcommands
 import com.github.ajalt.clikt.parameters.arguments.argument
 import com.github.ajalt.clikt.parameters.options.flag
@@ -13,7 +13,7 @@ import io.github.iromul.media.scripts.BuildArtworkCacheScript
 import io.github.iromul.media.scripts.OrganizeAndCopyFilesScript
 import io.github.iromul.media.scripts.config.Config
 
-class MediaOrganizerCommand : NoRunCliktCommand(
+class MediaOrganizerCommand : NoOpCliktCommand(
     name = "media-organizer",
     printHelpOnEmptyArgs = true
 )
@@ -25,14 +25,14 @@ class CopyMediaCommand : CliktCommand(
 ) {
 
     private val mediaRoot by option("-m", "--media-root", help = "Media directory root")
-        .file(exists = true, folderOkay = true, readable = true)
+        .file(mustExist = true, canBeFile = false, mustBeReadable = true)
         .required()
 
     private val dryRun by option("--dry-run", "-D", help = "Do not perform any file operations")
         .flag()
 
     private val output by argument(name = "DEST")
-        .file(exists = true, folderOkay = true, writable = true)
+        .file(mustExist = true, canBeFile = false, mustBeWritable = true)
 
     override fun run() {
         Config.mediaRoot = mediaRoot
@@ -50,7 +50,7 @@ class BuildArtworkCacheCommand : CliktCommand(
 ) {
 
     private val mediaRoot by option("-m", "--media-root", help = "Media directory root")
-        .file(exists = true, folderOkay = true, readable = true)
+        .file(mustExist = true, canBeFile = false, mustBeReadable = true)
         .required()
 
     override fun run() {
@@ -67,7 +67,7 @@ class AssignCoversToMediaFilesCommand : CliktCommand(
 ) {
 
     private val mediaRoot by option("-m", "--media-root", help = "Media directory root")
-        .file(exists = true, folderOkay = true, readable = true)
+        .file(mustExist = true, canBeFile = false, mustBeReadable = true)
         .required()
 
     private val dryRun by option("--dry-run", "-D", help = "Do not perform any file operations")

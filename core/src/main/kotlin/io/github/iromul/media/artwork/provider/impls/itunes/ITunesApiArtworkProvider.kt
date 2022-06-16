@@ -7,8 +7,8 @@ import io.github.iromul.media.artwork.provider.MediaFileUnprocessableException
 import io.github.iromul.media.commons.itunes.ITunesClient
 import io.github.iromul.media.commons.itunes.model.Entry
 import io.github.iromul.media.library.collection.MediaFile
-import io.ktor.client.features.ClientRequestException
-import io.ktor.http.HttpStatusCode
+import io.ktor.client.plugins.*
+import io.ktor.http.*
 
 class ITunesApiArtworkProvider(
     private val client: ITunesClient,
@@ -34,7 +34,7 @@ class ITunesApiArtworkProvider(
         return if (image != null) {
             val imageFile = BinaryImageFile(iTunesMediumImageSize, "image/jpeg", image)
 
-            persistentState?.found(terms)
+            persistentState?.found()
 
             ImageFilesCollection(listOf(imageFile))
         } else {

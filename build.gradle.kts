@@ -2,29 +2,39 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    kotlin("jvm") version "1.4.32" apply false
+    kotlin("jvm") version libs.versions.kotlin apply false
 }
 
-group = "io.github.iromul.media"
-version = "1.0-SNAPSHOT"
-
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_15
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(8))
+    }
 }
 
 subprojects {
-    tasks.withType<Test> {
-        useJUnitPlatform()
+    repositories {
+        mavenCentral()
+    }
+
+    tasks.withType<JavaCompile> {
+        sourceCompatibility = JavaVersion.VERSION_1_8.toString()
+        targetCompatibility = JavaVersion.VERSION_1_8.toString()
     }
 
     tasks.withType<KotlinCompile> {
         kotlinOptions {
-            jvmTarget = "15"
-            useIR = true
+            jvmTarget = "1.8"
         }
+    }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+        maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
+        reports.html.required.set(false)
+        reports.junitXml.required.set(false)
     }
 }
