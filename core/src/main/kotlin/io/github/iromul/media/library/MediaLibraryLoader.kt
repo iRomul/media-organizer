@@ -26,7 +26,7 @@ class MediaLibraryLoader {
         return MediaLibrary(mediaRoot, mediaCollections)
     }
 
-    private fun MediaCollectionTypeHandler.toMediaCollectionType() = MediaCollectionType(name)
+    private fun MediaCollectionTypeHandler.toMediaCollectionType() = MediaCollectionType(name, order)
 
     private fun File.walkMediaFiles(typeHandler: MediaCollectionTypeHandler): Sequence<MediaFile> {
         return walkTopDown()

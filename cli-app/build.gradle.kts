@@ -12,5 +12,6 @@ dependencies {
     implementation(libs.kotlin.stdlib.jdk7)
     implementation(libs.kotlin.stdlib.jdk8)
     implementation(libs.clikt)
+    implementation(libs.jaudiotagger)
     testImplementation(libs.junit.jupiter)
 }

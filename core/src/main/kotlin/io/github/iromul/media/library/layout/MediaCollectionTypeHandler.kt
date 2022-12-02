@@ -8,7 +8,7 @@ data class MediaCollectionTypeHandler(
     val name: String,
     val matcher: (collectionDirectory: File, relativePath: Path) -> Boolean,
     val mediaFilesMatcher: (mediaFile: File) -> Boolean,
-    val order: CollectionOrder? = null
+    val order: CollectionOrder
 ) {
 
     fun matches(collectionDirectory: File, relativePath: Path) = matcher(collectionDirectory, relativePath)

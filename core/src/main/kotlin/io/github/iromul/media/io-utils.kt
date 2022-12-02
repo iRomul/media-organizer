@@ -18,5 +18,6 @@ fun String.sanitizeWindowsFileName() = replace("[<>:\"/\\\\|?*]".toRegex(), "_")
 }
 
 val Path.extension: String get() = fileName.toString().substringAfterLast(".")
+val Path.dropExtension: String get() = fileName.toString().substringBeforeLast(".")
 
 fun File.listFilesSafely(): List<File> = listFiles()?.toList() ?: emptyList()

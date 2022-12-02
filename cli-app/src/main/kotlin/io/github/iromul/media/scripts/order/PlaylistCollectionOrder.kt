@@ -8,11 +8,9 @@ import io.github.iromul.media.meta.loadPlaylistData
 import io.github.iromul.media.playlist.PlaylistData
 import java.io.File
 
-class PlaylistCollectionOrder(
-    mediaCollection: MediaCollection
-): CollectionOrder(mediaCollection) {
+class PlaylistCollectionOrder : CollectionOrder {
 
-    override fun ordered(): Iterable<NamedMediaFile> {
+    override fun ordered(mediaCollection: MediaCollection): Iterable<NamedMediaFile> {
         val totalTracks = mediaCollection.size
         val totalTracksDigits = totalTracks.toString().length
 
@@ -21,7 +19,7 @@ class PlaylistCollectionOrder(
         val orderedMediaFiles = if (playlistFile.exists() && playlistFile.isFile) {
             val playlist = loadPlaylistData(playlistFile)
 
-            this.mediaCollection.mediaFiles.reorderByPlaylist(playlist)
+            mediaCollection.mediaFiles.reorderByPlaylist(playlist)
         } else {
             mediaCollection.mediaFiles.shuffled()
         }

@@ -3,11 +3,10 @@ package io.github.iromul.media.scripts
 import io.github.iromul.media.excludeRoot
 import io.github.iromul.media.extension
 import io.github.iromul.media.library.MediaLibraryLoader
-import io.github.iromul.media.library.collection.*
+import io.github.iromul.media.library.collection.MediaCollection
+import io.github.iromul.media.library.collection.stringify
 import io.github.iromul.media.sanitizeWindowsFileName
 import io.github.iromul.media.scripts.config.MediaLibraryLayoutConfig
-import io.github.iromul.media.scripts.order.AlbumCollectionOrder
-import io.github.iromul.media.scripts.order.PlaylistCollectionOrder
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
@@ -50,14 +49,7 @@ class OrganizeAndCopyFilesScript(
 
         val type = collection.type
 
-        val orderedMediaFiles = when {
-            type.isAlbum -> AlbumCollectionOrder(collection)
-            type.isPlaylist || type.isArtistEssentialPlaylist -> PlaylistCollectionOrder(collection)
-            type.isMix -> AlbumCollectionOrder(collection)
-            else -> error("Unsupported collection type: ${type.name}")
-        }
-
-        orderedMediaFiles.ordered().forEach { namedMediaFile ->
+        type.order.ordered(collection).forEach { namedMediaFile ->
             val newName = namedMediaFile.name
             val mediaFile = namedMediaFile.mediaFile
             val sourceFile = mediaFile.file

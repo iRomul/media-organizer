@@ -9,6 +9,8 @@ class MediaCollection(
     val mediaFiles: List<MediaFile>
 ) {
 
+    val isSet = mediaFiles.any(MediaFile::isPartOfSet)
+
     val size = mediaFiles.size
 
     override fun toString(): String {

@@ -1,9 +1,10 @@
 package io.github.iromul.media.scripts.config
 
 import io.github.iromul.media.library.layout.MediaCollectionLayout
-import io.github.iromul.media.library.layout.MediaCollectionTypeHandler
+import io.github.iromul.media.scripts.order.AlbumCollectionOrder
+import io.github.iromul.media.scripts.order.MixCollectionOrder
+import io.github.iromul.media.scripts.order.PlaylistCollectionOrder
 import java.io.File
-import java.nio.file.Path
 
 object MediaLibraryLayoutConfig {
 
@@ -12,33 +13,45 @@ object MediaLibraryLayoutConfig {
     }
 
     private val mediaCollectionTypes = listOf(
-        MediaCollectionTypeHandler(
+        registerMediaCollectionType(
             name = "Playlist",
             matcher = byRelativePath {
                 startsWith("Playlists") && nestingLevel() in (1..2)
             },
-            mediaFilesMatcher = defaultFileMatcher
+            mediaFilesMatcher = defaultFileMatcher,
+            order = PlaylistCollectionOrder()
         ),
-        MediaCollectionTypeHandler(
+        registerMediaCollectionType(
             name = "Album",
             matcher = byRelativePath {
                 startsWith("Artists") && nestingLevel() == 2 && !endsWith { it.startsWith("#") }
             },
-            mediaFilesMatcher = defaultFileMatcher
+            mediaFilesMatcher = defaultFileMatcher,
+            order = AlbumCollectionOrder()
         ),
-        MediaCollectionTypeHandler(
+        registerMediaCollectionType(
             name = "Artist Essential Playlist",
             matcher = byRelativePath {
                 startsWith("Artists") && nestingLevel() == 2 && endsWith { it.startsWith("#") }
             },
-            mediaFilesMatcher = defaultFileMatcher
+            mediaFilesMatcher = defaultFileMatcher,
+            order = PlaylistCollectionOrder()
         ),
-        MediaCollectionTypeHandler(
+        registerMediaCollectionType(
+            name = "OST",
+            matcher = byRelativePath {
+                startsWith("OST") && nestingLevel() in (1..2)
+            },
+            mediaFilesMatcher = defaultFileMatcher,
+            order = PlaylistCollectionOrder()
+        ),
+        registerMediaCollectionType(
             name = "Mix",
             matcher = byRelativePath {
                 startsWith("Mixes") && nestingLevel() == 1
             },
-            mediaFilesMatcher = defaultFileMatcher
+            mediaFilesMatcher = defaultFileMatcher,
+            order = MixCollectionOrder()
         )
     )
 
@@ -46,13 +59,4 @@ object MediaLibraryLayoutConfig {
         Config.mediaRoot,
         mediaCollectionTypes
     )
-
-    private fun byRelativePath(matcher: Path.() -> Boolean) =
-        { _: File, relativePath: Path -> relativePath.matcher() }
-
-    private fun Path.nestingLevel() = nameCount - 1
-
-    private fun Path.endsWith(matcher: (String) -> Boolean): Boolean {
-        return matcher(last().toString())
-    }
 }

@@ -24,6 +24,33 @@ data class MediaFile(
         get() = tag.getFirst(FieldKey.ALBUM)
     val title: String
         get() = tag.getFirst(FieldKey.TITLE)
+    val diskNo: Int
+        get() = tag.getFirst(FieldKey.DISC_NO).toIntOrNull() ?: 1
+    val hasDisks: Boolean
+        get() = tag.hasField("TPOS")
+    val totalDisks: Int
+        get() = tag.getFirst("TPOS").toIntOrNull() ?: 1
+
+    val isEnumeratedTrack: Boolean
+        get() = tag.hasField("TRCK")
+
+    val isPartOfSet: Boolean
+        get() = hasDisks && totalDisks > 1
+
+    val weight: Int
+        get() {
+            var sum = 0
+
+            if (isEnumeratedTrack) {
+                sum += track
+            }
+
+            if (isPartOfSet) {
+                sum += diskNo * 10_000
+            }
+
+            return sum
+        }
 
     fun hasFrontCoverOfSize(size: Int) = tag.artworkList.any { it.isFrontCover() && it.hasSize(size) }
 

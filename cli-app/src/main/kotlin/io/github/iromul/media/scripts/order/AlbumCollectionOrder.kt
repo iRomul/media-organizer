@@ -5,19 +5,33 @@ import io.github.iromul.media.library.collection.MediaFile
 import io.github.iromul.media.library.layout.order.CollectionOrder
 import io.github.iromul.media.library.layout.order.NamedMediaFile
 
-class AlbumCollectionOrder(
-    mediaCollection: MediaCollection
-) : CollectionOrder(mediaCollection) {
+class AlbumCollectionOrder : CollectionOrder {
 
-    override fun ordered(): Iterable<NamedMediaFile> {
+    override fun ordered(mediaCollection: MediaCollection): Iterable<NamedMediaFile> {
         val totalTracks = mediaCollection.size
-        val totalTracksDigits = totalTracks.toString().length
+        val totalTracksDigits = totalTracks.toString().length.coerceAtLeast(2)
 
         return mediaCollection.mediaFiles
-            .sortedBy(MediaFile::track)
+            .sortedBy(MediaFile::weight)
             .map {
-                val trackNumberFormatted = it.track.toString().padStart(totalTracksDigits, '0')
-                val fileName = "$trackNumberFormatted - ${it.title}"
+                val trackNumberFormatted = if (it.isEnumeratedTrack) {
+                    it.track.toString().padStart(totalTracksDigits, '0')
+                } else {
+                    null
+                }
+
+                val diskNoFormatted = if (mediaCollection.isSet) {
+                    it.diskNo.toString().padStart(2, '0')
+                } else {
+                    null
+                }
+
+                val positionFormatted = listOfNotNull(diskNoFormatted, trackNumberFormatted)
+                    .ifEmpty { null }
+                    ?.joinToString("-")
+
+                val fileName = listOfNotNull(positionFormatted, it.title)
+                    .joinToString(" - ")
 
                 NamedMediaFile(fileName, it)
             }

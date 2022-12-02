@@ -3,11 +3,9 @@ package io.github.iromul.media.library.layout.order
 import io.github.iromul.media.library.collection.MediaCollection
 import io.github.iromul.media.library.collection.MediaFile
 
-abstract class CollectionOrder(
-    protected val mediaCollection: MediaCollection
-) {
+interface CollectionOrder {
 
-    abstract fun ordered(): Iterable<NamedMediaFile>
+    fun ordered(mediaCollection: MediaCollection): Iterable<NamedMediaFile>
 }
 
 data class NamedMediaFile(
