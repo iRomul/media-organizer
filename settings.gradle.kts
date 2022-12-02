@@ -14,7 +14,7 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         create("libs") {
-            version("kotlin", "1.7.0")
+            version("kotlin", "1.7.21")
             version("ktor", "2.0.2")
 
             library("assertk-jvm", "com.willowtreeapps.assertk:assertk-jvm:0.22")
