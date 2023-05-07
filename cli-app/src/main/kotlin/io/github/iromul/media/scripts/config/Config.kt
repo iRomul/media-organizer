@@ -4,10 +4,7 @@ import io.github.iromul.media.artwork.provider.impls.AutoCacheableArtworkStore
 import io.github.iromul.media.artwork.provider.impls.AutoResizerArtworkStoreProxy
 import io.github.iromul.media.artwork.provider.impls.FileCacheArtworkStore
 import io.github.iromul.media.artwork.provider.impls.MediaFileReaderArtworkProvider
-import io.github.iromul.media.artwork.provider.impls.itunes.ITunesApiArtworkProvider
-import io.github.iromul.media.artwork.provider.impls.itunes.PersistentState
 import io.github.iromul.media.commons.fman.FileStorageManager
-import io.github.iromul.media.commons.itunes.ITunesClient
 import java.io.File
 import java.util.logging.LogManager
 
@@ -35,12 +32,12 @@ object Config {
 
     object BuildArtworkCacheScript {
 
-        private val iTunesClient = ITunesClient()
-        private val onlineProvider = ITunesApiArtworkProvider(
-            iTunesClient,
-            failWhenLimitIsReached = true,
-            persistentState = PersistentState(Globals.itunesProviderCachePath)
-        )
+//        private val iTunesClient = ITunesClient()
+//        private val onlineProvider = ITunesApiArtworkProvider(
+//            iTunesClient,
+//            failWhenLimitIsReached = true,
+//            persistentState = PersistentState(Globals.itunesProviderCachePath)
+//        )
 
         private val mediaFileProvider = MediaFileReaderArtworkProvider()
 
@@ -50,7 +47,7 @@ object Config {
         )
 
         val artworkProvider = AutoCacheableArtworkStore(
-            listOf(mediaFileProvider, onlineProvider),
+            listOf(mediaFileProvider, /* Not working for now: onlineProvider */),
             fileCacheStore
         )
     }

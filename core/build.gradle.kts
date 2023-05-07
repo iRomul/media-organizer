@@ -6,6 +6,7 @@ plugins {
 dependencies {
     implementation(libs.kotlin.stdlib.jdk7)
     implementation(libs.kotlin.stdlib.jdk8)
+    implementation(libs.kotlin.reflect)
     implementation(libs.jackson.databind)
     implementation(libs.jackson.module.kotlin)
     implementation(libs.jaudiotagger)

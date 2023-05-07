@@ -16,7 +16,7 @@ object MediaLibraryLayoutConfig {
         registerMediaCollectionType(
             name = "Playlist",
             matcher = byRelativePath {
-                startsWith("Playlists") && nestingLevel() in (1..2)
+                startsWith("Playlists") && nestingLevel() in (1..3)
             },
             mediaFilesMatcher = defaultFileMatcher,
             order = PlaylistCollectionOrder()
@@ -25,6 +25,14 @@ object MediaLibraryLayoutConfig {
             name = "Album",
             matcher = byRelativePath {
                 startsWith("Artists") && nestingLevel() == 2 && !endsWith { it.startsWith("#") }
+            },
+            mediaFilesMatcher = defaultFileMatcher,
+            order = AlbumCollectionOrder()
+        ),
+        registerMediaCollectionType(
+            name = "Labels",
+            matcher = byRelativePath {
+                startsWith("Labels") && nestingLevel() in (2..3)
             },
             mediaFilesMatcher = defaultFileMatcher,
             order = AlbumCollectionOrder()
@@ -52,6 +60,14 @@ object MediaLibraryLayoutConfig {
             },
             mediaFilesMatcher = defaultFileMatcher,
             order = MixCollectionOrder()
+        ),
+        registerMediaCollectionType(
+            name = "Misc",
+            matcher = byRelativePath {
+                startsWith("Misc") && nestingLevel() == 2
+            },
+            mediaFilesMatcher = defaultFileMatcher,
+            order = AlbumCollectionOrder()
         )
     )
 

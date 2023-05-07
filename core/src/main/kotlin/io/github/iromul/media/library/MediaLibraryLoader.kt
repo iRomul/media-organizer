@@ -7,12 +7,17 @@ import io.github.iromul.media.library.layout.MediaCollectionLayout
 import io.github.iromul.media.library.layout.MediaCollectionTypeHandler
 import org.jaudiotagger.audio.AudioFileIO
 import java.io.File
+import java.io.FileFilter
+
+private val File.isNotEmpty: Boolean
+    get() = listFiles(FileFilter { it.isFile }).isNotEmpty()
 
 class MediaLibraryLoader {
 
     fun load(mediaRoot: File, layout: MediaCollectionLayout): MediaLibrary {
         val mediaCollections = mediaRoot.walkTopDown()
             .filter { it.isDirectory }
+            .filter { it.isNotEmpty }
             .filter { layout.isMediaCollectionDirectory(it) }
             .map {
                 val typeMatcher = layout.findMediaCollectionTypeHandler(it)!!

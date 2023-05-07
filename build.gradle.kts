@@ -11,7 +11,7 @@ repositories {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(8))
+        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
 
@@ -21,13 +21,13 @@ subprojects {
     }
 
     tasks.withType<JavaCompile> {
-        sourceCompatibility = JavaVersion.VERSION_1_8.toString()
-        targetCompatibility = JavaVersion.VERSION_1_8.toString()
+        sourceCompatibility = JavaVersion.VERSION_17.toString()
+        targetCompatibility = JavaVersion.VERSION_17.toString()
     }
 
     tasks.withType<KotlinCompile> {
         kotlinOptions {
-            jvmTarget = "1.8"
+            jvmTarget = "17"
         }
     }
 

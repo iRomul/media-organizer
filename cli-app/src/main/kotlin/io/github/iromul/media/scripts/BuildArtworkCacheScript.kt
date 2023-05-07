@@ -18,6 +18,9 @@ class BuildArtworkCacheScript(
 
         val provider = Config.BuildArtworkCacheScript.artworkProvider
 
+        var total = 0
+        var success = 0
+
         try {
             mediaLibrary.mediaCollections
                 .filter { !it.type.isMix }
@@ -31,8 +34,12 @@ class BuildArtworkCacheScript(
                             if (cacheEntry.isEmpty()) {
                                 println(": Not loaded")
                             } else {
+                                ++success
+
                                 println(": ${cacheEntry.joinToString { e -> e.size.toString() }}")
                             }
+
+                            ++total
                         } catch (e: Exception) {
                             System.err.println(
                                 "An error occurred during file processing: ${e.message}\n" +
@@ -46,6 +53,8 @@ class BuildArtworkCacheScript(
         } catch (e: Exception) {
             System.err.println("An error occurred during script execution: ${e.message}")
             e.printStackTrace()
+        } finally {
+            println("Success $success of $total")
         }
     }
 }
