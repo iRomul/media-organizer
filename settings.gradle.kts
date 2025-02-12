@@ -4,8 +4,9 @@ rootProject.name = "media-organizer"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include("cli-app")
-include("core")
+include(":music-library:cli-app")
+include(":music-library:core")
+include(":photo-library:cli-app")
 
 dependencyResolutionManagement {
     repositories {
