@@ -80,8 +80,9 @@ class AssignCoversToMediaFilesCommand : CliktCommand(
     }
 }
 
-fun main(args: Array<String>): Unit = MediaOrganizerCommand()
-    .subcommands(CopyMediaCommand())
-    .subcommands(BuildArtworkCacheCommand())
-    .subcommands(AssignCoversToMediaFilesCommand())
-    .main(args)
+fun main(args: Array<String>) =
+    MediaOrganizerCommand()
+        .subcommands(CopyMediaCommand())
+        .subcommands(BuildArtworkCacheCommand())
+        .subcommands(AssignCoversToMediaFilesCommand())
+        .main(args)

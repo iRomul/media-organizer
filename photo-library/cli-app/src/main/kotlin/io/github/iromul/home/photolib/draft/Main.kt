@@ -1,4 +1,4 @@
-package io.github.iromul.home
+package io.github.iromul.home.photolib.draft
 
 import org.apache.commons.imaging.Imaging
 import org.apache.commons.imaging.formats.jpeg.JpegImageMetadata
@@ -86,7 +86,7 @@ fun main() {
             exifDirectory.removeField(ExifTagConstants.EXIF_TAG_DATE_TIME_ORIGINAL)
             exifDirectory.add(ExifTagConstants.EXIF_TAG_DATE_TIME_ORIGINAL, exifDateAscii)
 
-            outputSet.setGPSInDegrees(30.373405, 59.928361)
+//            outputSet.setGPSInDegrees(30.373405, 59.928361)
 //            outputSet.setGPSInDegrees(30.265221, 59.885900)
 
             val targetFilename = "$dateStamp-$photoId-wedding-banquet.jpg"

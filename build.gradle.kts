@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     java
     alias(libs.plugins.kotlin) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
 }
 
 repositories {

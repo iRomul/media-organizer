@@ -4,6 +4,7 @@ ktor = "3.0.3"
 
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 [libraries]
 assertk-jvm = { module = "com.willowtreeapps.assertk:assertk-jvm", version.strictly = "0.22" }

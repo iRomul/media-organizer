@@ -1,0 +1,36 @@
+{
+  "title": "20181005_191826.jpg",
+  "description": "",
+  "imageViews": "46",
+  "creationTime": {
+    "timestamp": "1538761824",
+    "formatted": "5 окт. 2018 г., 17:50:24 UTC"
+  },
+  "photoTakenTime": {
+    "timestamp": "1538756306",
+    "formatted": "5 окт. 2018 г., 16:18:26 UTC"
+  },
+  "geoData": {
+    "latitude": 55.1,
+    "longitude": 30.0,
+    "altitude": 23.0,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 60.1,
+    "longitude": 31.1,
+    "altitude": 23.0,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "url": "https://photos.google.com/photo/123",
+  "googlePhotosOrigin": {
+    "mobileUpload": {
+      "deviceFolder": {
+        "localFolderName": ""
+      },
+      "deviceType": "ANDROID_PHONE"
+    }
+  }
+}
